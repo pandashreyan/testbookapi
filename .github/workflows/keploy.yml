@@ -44,3 +44,4 @@ jobs:
           pwd
           ls -l
           ./keploy test --proxy-port 8080
+        working-directory: ${{ github.workspace }}
