@@ -1,0 +1,31 @@
+api-test
+
+pandashreyan7
+J1d0H4IhP1uVkrWR
+
+mongodb+srv://pandashreyan7:<db_password>@cluster0.yvb5jy0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+$book = @{
+    title="Sample Book";
+    author="John Doe";
+    publishedYear=2023
+} | ConvertTo-Json
+Invoke-RestMethod -Uri "http://localhost:3000/api/books" -Method Post -Body $book -ContentType "application/json"
+------------------------------------------------------------------------------------------------
+$book = @{
+    title = "The Great Gatsby"
+    author = "F. Scott Fitzgerald"
+    publishedYear = 1925
+} | ConvertTo-Json
+Invoke-RestMethod -Uri "http://localhost:3000/api/books" -Method Post -Body $book -ContentType "application/json"   ##create
+--------------------------------------------------------------------------------------------------
+Invoke-RestMethod -Uri "http://localhost:3000/api/books" -Method Get
+---------------------------------------------------------------------------------------------------
+$update = @{
+    publishedYear = 2024
+} | ConvertTo-Json
+Invoke-RestMethod -Uri "http://localhost:3000/api/books/$id" -Method Put -Body $update -ContentType "application/json"
+-------------------------------------------------------------------------------------------------------
+Invoke-RestMethod -Uri "http://localhost:3000/api/books/$id" -Method Delete
+-------------------------------------------------------------------------------------------------------
+$id = "YOUR_BOOK_ID_HERE"  # Replace with actual _id from step 1
+Invoke-RestMethod -Uri "http://localhost:3000/api/books/$id" -Method Delete

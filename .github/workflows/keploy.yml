@@ -1,0 +1,42 @@
+name: Keploy API Testing
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  keploy-test:
+    runs-on: ubuntu-latest
+
+    services:
+      mongo:
+        image: mongo:6.0
+        ports:
+          - 27017:27017
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Start API server
+        run: |
+          nohup npm start &
+          sleep 10
+
+      - name: Download Keploy CLI
+        run: |
+          curl -sSfL https://keploy.io/ent/install.sh | sh
+
+      - name: Run Keploy tests
+        run: |
+          ./keploy test --proxy-port 8080

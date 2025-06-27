@@ -1,0 +1,20 @@
+version: '3.3'
+services:
+  app:
+    build: .
+    container_name: my-node-api
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGODB_URI=${MONGODB_URI}
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:6.0
+    container_name: my-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+volumes:
+  mongo-data:
