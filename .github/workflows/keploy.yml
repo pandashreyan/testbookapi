@@ -35,8 +35,15 @@ jobs:
 
       - name: Download Keploy CLI
         run: |
-          wget https://github.com/keploy/keploy/releases/latest/download/keploy-linux-amd64 -O keploy
+          wget https://github.com/keploy/keploy/releases/latest/download/keploy-linux-amd64 -O keploy || \
+          curl -L https://github.com/keploy/keploy/releases/latest/download/keploy-linux-amd64 -o keploy
           chmod +x ./keploy
+          ls -l ./keploy
+
+      - name: Check Keploy binary
+        run: |
+          pwd
+          ls -l
           ls -l ./keploy
 
       - name: Run Keploy tests
