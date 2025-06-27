@@ -35,7 +35,8 @@ jobs:
 
       - name: Download Keploy CLI
         run: |
-          curl -sSfL https://keploy.io/ent/install.sh | sh
+          curl -L https://github.com/keploy/keploy/releases/latest/download/keploy-linux-amd64 -o keploy
+          chmod +x keploy
 
       - name: Run Keploy tests
         run: |
