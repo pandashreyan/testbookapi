@@ -47,5 +47,6 @@ jobs:
 
       - name: Run Keploy tests
         run: |
+          echo "[Keploy Workflow] Running keploy test from .github/workflows/keploy.yml"
           # Run Keploy API tests
           keploy test
