@@ -30,15 +30,21 @@ jobs:
 
       - name: Start API server
         run: |
-          nohup npm start &
-          sleep 10
+          nohup npm start & # Run in background
+          sleep 10 # Give the server time to start
 
       - name: Download Keploy binary
         run: |
-          curl -L https://github.com/keploy/keploy/releases/latest/download/keploy-linux-amd64 -o keploy
+          curl -L 'https://github.com/keploy/keploy/releases/latest/download/keploy-linux-amd64' -o keploy
           chmod +x keploy
+          sudo mv keploy /usr/local/bin/
+
+      - name: Verify Keploy binary
+        run: |
+          ls -l /usr/local/bin/keploy # Check file existence and permissions
+          file /usr/local/bin/keploy # Check file type
 
       - name: Run Keploy tests
         run: |
-          ./keploy test --proxy-port 8080
+          keploy test --proxy-port 8080
         working-directory: ${{ github.workspace }}
