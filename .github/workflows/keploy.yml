@@ -44,7 +44,13 @@ jobs:
           ls -l /usr/local/bin/keploy # Check file existence and permissions
           file /usr/local/bin/keploy # Check file type
 
+      - name: Debug Keploy binary
+        run: |
+          echo "PATH is: $PATH"
+          which keploy || echo "keploy not in PATH"
+          ls -l /usr/local/bin/keploy || echo "keploy not in /usr/local/bin"
+          file /usr/local/bin/keploy || echo "file type check failed"
+
       - name: Run Keploy tests
         run: |
           keploy test --proxy-port 8080
-        working-directory: ${{ github.workspace }}
