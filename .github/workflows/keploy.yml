@@ -44,9 +44,7 @@ jobs:
         run: |
           ls -l /usr/local/bin/keploy
           file /usr/local/bin/keploy
-          /usr/local/bin/keploy version || echo "Keploy version check failed"
 
       - name: Run Keploy tests
         run: |
-          keploy version
           keploy test --proxy-port 8080
