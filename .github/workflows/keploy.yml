@@ -35,8 +35,9 @@ jobs:
 
       - name: Download Keploy binary
         run: |
-          curl -L 'https://github.com/keploy/keploy/releases/latest/download/keploy-linux-amd64' -o keploy
+          curl -fL https://github.com/keploy/keploy/releases/latest/download/keploy-linux-amd64 -o keploy
           chmod +x keploy
+          file keploy
           sudo mv keploy /usr/local/bin/
 
       - name: Verify Keploy binary
