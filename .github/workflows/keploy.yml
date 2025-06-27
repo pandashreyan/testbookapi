@@ -33,19 +33,12 @@ jobs:
           nohup npm start &
           sleep 10
 
-      - name: Download Keploy CLI
+      - name: Download Keploy binary
         run: |
-          wget https://github.com/keploy/keploy/releases/latest/download/keploy-linux-amd64 -O keploy || \
           curl -L https://github.com/keploy/keploy/releases/latest/download/keploy-linux-amd64 -o keploy
-          chmod +x ./keploy
-          ls -l ./keploy
-
-      - name: Find Keploy binary
-        run: |
-          which keploy || echo 'keploy not in PATH'
-          ls -l keploy || echo 'keploy not in current dir'
+          chmod +x keploy
 
       - name: Run Keploy tests
         run: |
-          keploy test --proxy-port 8080
+          ./keploy test --proxy-port 8080
         working-directory: ${{ github.workspace }}
