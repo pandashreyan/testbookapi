@@ -37,7 +37,10 @@ jobs:
         run: |
           curl -L https://github.com/keploy/keploy/releases/latest/download/keploy-linux-amd64 -o keploy
           chmod +x keploy
+          ls -l keploy
 
       - name: Run Keploy tests
         run: |
+          pwd
+          ls -l
           ./keploy test --proxy-port 8080
