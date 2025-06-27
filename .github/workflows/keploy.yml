@@ -40,5 +40,6 @@ jobs:
 
       - name: Run Keploy tests
         run: |
+          export PATH="$HOME/.keploy:$HOME/.local/bin:$PATH"
           keploy test --proxy-port 8080
         working-directory: ${{ github.workspace }}
