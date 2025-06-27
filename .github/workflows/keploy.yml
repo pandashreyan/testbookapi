@@ -35,11 +35,11 @@ jobs:
 
       - name: Download Keploy CLI
         run: |
-          curl -sSfL https://keploy.io/ent/install.sh | sh
-          echo "$HOME/.keploy" >> $GITHUB_PATH
+          wget https://github.com/keploy/keploy/releases/latest/download/keploy-linux-amd64 -O keploy
+          chmod +x ./keploy
+          ls -l ./keploy
 
       - name: Run Keploy tests
         run: |
-          export PATH="$HOME/.keploy:$HOME/.local/bin:$PATH"
-          keploy test --proxy-port 8080
+          ./keploy test --proxy-port 8080
         working-directory: ${{ github.workspace }}
