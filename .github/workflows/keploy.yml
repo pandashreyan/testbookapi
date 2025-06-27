@@ -38,21 +38,15 @@ jobs:
           curl -fL https://github.com/keploy/keploy/releases/download/v2.6.14/keploy_linux_amd64.tar.gz -o keploy_linux_amd64.tar.gz
           tar -xzf keploy_linux_amd64.tar.gz
           chmod +x keploy
-          file keploy
           sudo mv keploy /usr/local/bin/
 
       - name: Verify Keploy binary
         run: |
-          ls -l /usr/local/bin/keploy # Check file existence and permissions
-          file /usr/local/bin/keploy # Check file type
-
-      - name: Debug Keploy binary
-        run: |
-          echo "PATH is: $PATH"
-          which keploy || echo "keploy not in PATH"
-          ls -l /usr/local/bin/keploy || echo "keploy not in /usr/local/bin"
-          file /usr/local/bin/keploy || echo "file type check failed"
+          ls -l /usr/local/bin/keploy
+          file /usr/local/bin/keploy
+          /usr/local/bin/keploy version || echo "Keploy version check failed"
 
       - name: Run Keploy tests
         run: |
+          keploy version
           keploy test --proxy-port 8080
