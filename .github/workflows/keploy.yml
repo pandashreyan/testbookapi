@@ -47,4 +47,5 @@ jobs:
 
       - name: Run Keploy tests
         run: |
-          keploy test --proxy-port 8080
+          # Run Keploy API tests
+          keploy test
