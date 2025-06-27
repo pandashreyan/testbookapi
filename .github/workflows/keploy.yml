@@ -40,13 +40,12 @@ jobs:
           chmod +x ./keploy
           ls -l ./keploy
 
-      - name: Check Keploy binary
+      - name: Find Keploy binary
         run: |
-          pwd
-          ls -l
-          ls -l ./keploy
+          which keploy || echo 'keploy not in PATH'
+          ls -l keploy || echo 'keploy not in current dir'
 
       - name: Run Keploy tests
         run: |
-          ./keploy test --proxy-port 8080
+          keploy test --proxy-port 8080
         working-directory: ${{ github.workspace }}
