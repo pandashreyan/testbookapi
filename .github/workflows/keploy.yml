@@ -44,6 +44,7 @@ jobs:
         run: |
           ls -l /usr/local/bin/keploy
           file /usr/local/bin/keploy
+          keploy --help || echo "Keploy help check failed"
 
       - name: Run Keploy tests
         run: |
